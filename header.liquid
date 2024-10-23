@@ -59,24 +59,6 @@ Testing Cypress integration
   {% endcapture %}
 {% endif %}
 
-{% assign menu_size_right = linklists[section.settings.main_linklist_right] | size %}
-{% if menu_size_right == 0 %}
-  {% assign site_nav_right = blank %}
-{% else %}
-  
-  {% capture site_nav_right %}
-    <div class="js site-header__nav top-links" id="top_links_wrapper_right">
-      <ul class="site-nav nav-link-animated right-menu-test {% if mega_menu_block %} mega-menu-wrapper{% endif %}" id="HeaderRightMenus" role="navigation">
-        {% render 'nav-main-right', mega_menu: mega_menu_block, logo_position: section.settings.logo-placement %}
-      </ul>
-    </div>
-    <noscript>
-      {% assign menu = linklists[section.settings.main_linklist_right] %}
-      {% render 'noscript-menu', menu: menu %}
-    </noscript>
-  {% endcapture %}
-{% endif %}
-
 {% capture top_links %}
   <ul class="site-header__links top-links--icon-links">
     {% if section.settings.enable_search %}
@@ -115,15 +97,6 @@ Testing Cypress integration
       {% endif %}
     {% endif %}
 
-    <li>
-      <a href="#swym-wishlist" class="wishlist-header">
-        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" width="24" height="24">
-          <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41 1.01 4.5 2.09C13.09 4.01 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-        <!-- <img height="" width="" src="{{ 'wishlist-icon2.svg' | asset_url }}" alt="Logo" /> -->
-      </a>
-    </li>
-    
     <li>
       <a 
         href="{{ routes.cart_url }}" 
@@ -192,20 +165,16 @@ Testing Cypress integration
 
     <div class="mobile-nav-grid-container">
       <div class="mobile-nav__logo-title">
-        <div class="mobile-nav__logo-title--inner mob-custom-logo">
-          <a class="site-header__logo-link" href="{{ routes.root_url }}" itemprop="url">
-          	<img height="" width="" src="{{ 'sultana-logo.png' | asset_url }}" alt="Logo" />
+        <div class="mobile-nav__logo-title--inner">
+          <a class="mobile-menu--close-btn standalone-icon--wrapper" aria-label="{{ 'layout.drawers.close_menu' | t }}" role="button">
+            {% render 'theme-icon' with icon: 'close', iconSize: 20 %}
           </a>
         </div>
       </div>
 
-
       <!-- begin mobile-nav -->
       <ul class="mobile-nav mobile-nav--main">
         {% assign menu = linklists[section.settings.main_linklist] %}
-        {% comment %} {% assign right_menu = linklists[section.settings.main_linklist_right] %}
-        {% assign combined_links = menu.links | concat: right_menu.links %} {% endcomment %}
-        
         {% for link in menu.links %}
           {% liquid 
             assign link-title = link.title | strip | downcase
@@ -232,47 +201,36 @@ Testing Cypress integration
             endfor
           %}
           {% if link.links != blank %}
-            <li class="mob-top-level-menu mobile-nav__item top-level{% if link.active %} mobile-nav__item--active{% endif %}{% if is-mega-menu %} mega-menu--mobile{% endif %}" aria-haspopup="true">
+            <li class="mobile-nav__item top-level{% if link.active %} mobile-nav__item--active{% endif %}{% if is-mega-menu %} mega-menu--mobile{% endif %}" aria-haspopup="true">
               <div class="mobile-nav__has-sublist">
-                <a href="{{ link.url }}" class="mobile-nav__link {{ link.handle }}">{{ link.title }}</a>
+                <a href="{{ link.url }}" class="mobile-nav__link">{{ link.title }}</a>
                 <div class="mobile-nav__toggle">
                   <button type="button" class="icon-fallback-text mobile-nav__toggle-open standalone-icon--wrapper touch-target icon-no-padding" aria-label="{{ 'cart.general.see_more' | t }}">
-                    {% render 'theme-icon', icon: 'chevron_right', iconSize: 16, iconAttributes: 'aria-hidden="true"' %}
+                    {% render 'theme-icon', icon: 'chevron_down', iconSize: 16, iconAttributes: 'aria-hidden="true"' %}
                   </button>
-                  {% comment %}
-                    <button type="button" class="icon-fallback-text mobile-nav__toggle-close standalone-icon--wrapper touch-target icon-no-padding" aria-label="{{ 'layout.drawers.close_menu' | t }}">
-                      {% render 'theme-icon', icon: 'chevron_up', iconSize: 16, iconAttributes: 'aria-hidden="true"' %}
-                    </button>
-                  {% endcomment %}                  
+                  <button type="button" class="icon-fallback-text mobile-nav__toggle-close standalone-icon--wrapper touch-target icon-no-padding" aria-label="{{ 'layout.drawers.close_menu' | t }}">
+                    {% render 'theme-icon', icon: 'chevron_up', iconSize: 16, iconAttributes: 'aria-hidden="true"' %}
+                  </button>
                 </div>
               </div>
-              <ul class="mobile-nav__sublist custom-submenu">
-                <li class="submenu-title">
-                  <button type="button" class="close-submenu" aria-label="{{ 'layout.drawers.close_menu' | t }}">
-                    {% render 'theme-icon', icon: 'chevron_left', iconSize: 20, iconAttributes: 'aria-hidden="true"' %}
-                  </button>
-                  <span>{{ link.title }}</span>
-                </li>
+              <ul class="mobile-nav__sublist">
                 {% for sub_link in link.links %}
                   {% if sub_link.levels > 0 %}
-                    <li class="mobile-nav__item{% if sub_link.active %} mobile-nav__item--active{% endif %}">
-                      <div class="mobile-nav__has-sublist third-level-mobile-nav">
+                    <li class="mobile-nav__item {% if sub_link.active %} mobile-nav__item--active{% endif %}">
+                      <div class="mobile-nav__has-sublist">
                         <a href="{{ sub_link.url }}" class="mobile-nav__link">{{ sub_link.title | escape }}</a>
                         <div class="mobile-nav__toggle">
-                          <button type="button" class="third-level-menu-open icon-fallback-text mobile-nav__toggle-open standalone-icon--wrapper touch-target icon-no-padding" name="{{ 'cart.general.see_more' | t }}">
-                            {% render 'theme-icon', icon: 'chevron_right', iconSize: 16, iconAttributes: 'aria-hidden="true"' %}
+                          <button type="button" class="icon-fallback-text mobile-nav__toggle-open standalone-icon--wrapper touch-target icon-no-padding" name="{{ 'cart.general.see_more' | t }}">
+                            {% render 'theme-icon', icon: 'chevron_down', iconSize: 16, iconAttributes: 'aria-hidden="true"' %}
                             <span class="fallback-text">{{ 'cart.general.see_more' | t }}</span>
+                          </button>
+                          <button type="button" class="icon-fallback-text mobile-nav__toggle-close standalone-icon--wrapper touch-target icon-no-padding" name="{{ 'layout.drawers.close_menu' | t }}">
+                            {% render 'theme-icon', icon: 'chevron_up', iconSize: 16, iconAttributes: 'aria-hidden="true"' %}
+                            <span class="fallback-text">{{ 'layout.drawers.close_menu' | t }}</span>
                           </button>
                         </div>
                       </div>
-                      <ul class="mobile-nav__sublist submenu-level-third">
-                        <li class="submenu-title">
-                          <button type="button" class="close-submenu level-third-menu" name="{{ 'layout.drawers.close_menu' | t }}">
-                            {% render 'theme-icon', icon: 'chevron_left', iconSize: 20, iconAttributes: 'aria-hidden="true"' %}
-                            <span class="fallback-text">{{ 'layout.drawers.close_menu' | t }}</span>
-                          </button>
-                          <span>{{ sub_link.title }}</span>
-                        </li>                        
+                      <ul class="mobile-nav__sublist">
                         {% for sub_sub_link in sub_link.links %}
                           <li class="mobile-nav__item">
                             <a href="{{ sub_sub_link.url }}" class="mobile-nav__link">{{ sub_sub_link.title | escape }}</a>
@@ -367,139 +325,215 @@ Testing Cypress integration
               </ul>
             </li>
           {% else %}
-            
-            <li class="mob-top-level-menu mobile-nav__item top-level{% if link.active %} mobile-nav__item--active{% endif %}{% if is-mega-menu %} mega-menu--mobile no-links{% endif %}">
-
+            <li class="mobile-nav__item top-level{% if link.active %} mobile-nav__item--active{% endif %}{% if is-mega-menu %} mega-menu--mobile no-links{% endif %}">
               {% if is-mega-menu %}
-                
                 <div class="mobile-nav__has-sublist">
                   <a href="{{ link.url }}" class="mobile-nav__link">{{ link.title }}</a>
                   <div class="mobile-nav__toggle">
                     <button type="button" class="icon-fallback-text mobile-nav__toggle-open standalone-icon--wrapper touch-target icon-no-padding" aria-label="{{ 'cart.general.see_more' | t }}">
-                      {% render 'theme-icon', icon: 'chevron_right', iconSize: 16, iconAttributes: 'aria-hidden="true"' %}
+                      {% render 'theme-icon', icon: 'chevron_down', iconSize: 16, iconAttributes: 'aria-hidden="true"' %}
                     </button>
-                    {% comment %}
-                      <button type="button" class="icon-fallback-text mobile-nav__toggle-close standalone-icon--wrapper touch-target icon-no-padding" aria-label="{{ 'layout.drawers.close_menu' | t }}">
-                        {% render 'theme-icon', icon: 'chevron_up', iconSize: 16, iconAttributes: 'aria-hidden="true"' %}
-                      </button>
-                    {% endcomment %}
+                    <button type="button" class="icon-fallback-text mobile-nav__toggle-close standalone-icon--wrapper touch-target icon-no-padding" aria-label="{{ 'layout.drawers.close_menu' | t }}">
+                      {% render 'theme-icon', icon: 'chevron_up', iconSize: 16, iconAttributes: 'aria-hidden="true"' %}
+                    </button>
                   </div>
                 </div>
 
-                <ul class="mobile-nav__sublist custom-mega-menu custom-submenu">
-                  {% if section.settings.featured_collection %}
-                    <li class="submenu-title">
-                      <button type="button" class="close-submenu" aria-label="{{ 'layout.drawers.close_menu' | t }}">
-                        {% render 'theme-icon', icon: 'chevron_left', iconSize: 20, iconAttributes: 'aria-hidden="true"' %}
-                      </button>
-                      <span>{{ link.title }}</span>
-                    </li>
-                    {% for collection in section.settings.featured_collection %}
-                      <li class="mobile-nav__item">
-                        <div class="mobile-nav__has-sublist tags-sublist">
-                          <a href="{{ collection.url }}" class="mobile-nav__link">{{ collection.title | escape }}</a>
+                <ul class="mobile-nav__sublist">
+                  <ul class="mobile-promo--block">
+                    {% for block in section.blocks %}
 
-                          {% if collection.products.size > 0 %}
-                            <div class="mobile-nav__toggle show-tags">
-                              <button type="button" class="icon-fallback-text mobile-nav__toggle-open standalone-icon--wrapper touch-target icon-no-padding" name="{{ 'cart.general.see_more' | t }}">
-                                {% render 'theme-icon', icon: 'plus', iconSize: 16, iconAttributes: 'aria-hidden="true"' %}
-                                <span class="fallback-text">{{ 'cart.general.see_more' | t }}</span>
-                              </button>
-                              <button type="button" class="icon-fallback-text mobile-nav__toggle-close standalone-icon--wrapper touch-target icon-no-padding" name="{{ 'layout.drawers.close_menu' | t }}">
-                                {% render 'theme-icon', icon: 'minus', iconSize: 16, iconAttributes: 'aria-hidden="true"' %}
-                                <span class="fallback-text">{{ 'layout.drawers.close_menu' | t }}</span>
-                              </button>
-                            </div>
-                          {% endif %}
-                        </div>
-  
-                         {% if collection %}
-                          {% assign all_tags = '' %}
-                           {% if collection.products.size > 0 %}
-                            <ul class="mobile-nav__sublist_custom custom-tags-list" style="display:none;">
+                      {% liquid
+                        assign link-title = link.title | strip | downcase
+                        assign block-title = block.settings.mega-menu | strip | downcase
 
-                              {% comment %}
-                              {% for product in collection.products %}
-                                {% for tag in product.tags %}
-                                  {% unless all_tags contains tag %}
-                                    {% assign all_tags = all_tags | append: tag | append: ',' %}
-                                  {% endunless %}
-                                {% endfor %}
-                              {% endfor %}
-                              {% endcomment %}
-                              
-                              {% for product in collection.products %}
-                                {% for tag in product.tags %}
-                                  {% unless all_tags contains tag %}
-                                    {% assign tag = tag | capitalize %}
-                                    {% assign all_tags = all_tags | append: tag | append: ',' %}
-                                  {% endunless %}
-                                {% endfor %}
-                              {% endfor %}
+                        assign image_1_stretch = false
+                        assign crop_setting_1 = block.settings.image_1_aspect_ratio
+                        if crop_setting_1 == "square"
+                          assign image_1_crop = "aspect-ratio--square"
+                          assign image_1_stretch = true
+                        elsif crop_setting_1 == "tall"
+                          assign image_1_crop = "aspect-ratio--tall"
+                          assign image_1_stretch = true
+                        elsif crop_setting_1 == "wide"
+                          assign image_1_crop = "aspect-ratio--wide"
+                          assign image_1_stretch = true
+                        else
+                          assign image_1_crop = false
+                          assign image_1_stretch = false
+                        endif
 
-                              {% assign all_tags = all_tags | split: ',' %}
-                              {% assign tag_map = "" %}
-                              {% for tag in all_tags %}
-                                {% assign lowercased_tag = tag | downcase %}
-                                 {% assign tag_map = tag_map | append: lowercased_tag | append: ":" | append: tag | append: "|" %}
-                              {% endfor %}
-            
-                              {% assign tag_map = tag_map | split: "|" | sort %}  
+                        assign image_2_stretch = false
+                        assign crop_setting_2 = block.settings.image_2_aspect_ratio
+                        if crop_setting_2 == "square"
+                          assign image_2_crop = "aspect-ratio--square"
+                          assign image_2_stretch = true
+                        elsif crop_setting_2 == "tall"
+                          assign image_2_crop = "aspect-ratio--tall"
+                          assign image_2_stretch = true
+                        elsif crop_setting_2 == "wide"
+                          assign image_2_crop = "aspect-ratio--wide"
+                          assign image_2_stretch = true
+                        else
+                          assign image_2_crop = false
+                          assign image_2_stretch = false
+                        endif
 
-                              <!-- New Code -->
-                              {% for tag in all_tags %}
-                                {% if tag != '' %}
-                                    <li class="mobile-nav__item">
-                                      <a href="/collections/{{ collection.handle }}/?filter.p.tag={{ tag }}" class="mobile-nav__link">{{ tag }}</a>
-                                    </li>
-                                {% endif %}
-                              {% endfor %}
-                               <!-- New Code END -->                             
+                        assign first_promo_has_text = false
+                        if block.settings.mega_image_header_1 != blank or block.settings.mega_image_subheader_1 != blank
+                          assign first_promo_has_text = true
+                        endif
 
-                              {% comment %}
-                              {% if tag_map.size > 0 %}
-                                    {% for tag in tag_map %}
-                                      {% if tag != '' %}
-                                        {% assign tag_val = tag | split: ":" %}
-                                          <li class="mobile-nav__item">
-                                            <a href="/collections/{{ collection.handle }}/?filter.p.tag={{ tag_val[1] }}" class="mobile-nav__link">{{ tag_val[0] }}</a>
-                                          </li>
+                        assign second_promo_has_text = false
+                        if block.settings.mega_image_header_2 != blank or block.settings.mega_image_subheader_2 != blank
+                          assign second_promo_has_text = true
+                        endif
+                      %}
+
+                      {% style %}
+                        .block-id-{{ block.id }} .overlay-text-on-image-promo-1 {
+                          color: {{ block.settings.overlay_text_color_promo_1 }};
+                        }
+
+                        .block-id-{{ block.id }} .overlay-text-on-image-promo-2 {
+                          color: {{ block.settings.overlay_text_color_promo_2 }};
+                        }
+                      {% endstyle %}
+
+                      {% if link-title == block-title %}
+                        {% if block.settings.mega_image_1 == blank and block.settings.mega_image_2 == blank %}
+                          <li class="mobile-nav__item {% if sub_link.active %} mobile-nav__item--active{% endif %}">
+                            <p class="mega-menu--empty" {% unless request.design_mode %}style="visibility:hidden;"{% endunless %}>
+                              This megamenu doesn't currently have any content. Add content to the megamenu in the Shopify admin at: Online store > Menu.
+                            </p>
+                          </li>
+                        {% else %}
+                          {% if block.settings.mega_image_1 and block.settings.show_promo_1_in_mobile_drawer %}
+                            <li class="mobile-nav__item block-id-{{ block.id }}">
+                              <div class="inner mega-menu--image-wrapper">
+                                <div class="mega-menu--image{% if block.settings.overlay_text_on_image_promo_1 %} overlay--enabled{% endif %}{% if first_promo_has_text %} has-promo-text{% endif %}">
+                                  {% if block.settings.mega_image_link_1 %}
+                                    <a class="mega-menu-promo--image{% if image_1_crop %} mega-menu-aspect-ratio {{ image_1_crop }}{% endif %}" href="{{ block.settings.mega_image_link_1 }}">
+                                  {% else %}
+                                    <div class="mega-menu-promo--image{% if image_1_crop %} mega-menu-aspect-ratio {{ image_1_crop }}{% endif %}">
+                                  {% endif %}
+                                  {% capture img_props %}style="max-width: {{ block.settings.mega_image_1.width }}px"{% endcapture %}
+                        
+                                  {% if block.settings.mega_image_1.alt != empty %}
+                                      {% capture img_alt %}{{ block.settings.mega_image_1.alt }}{% endcapture %}
+                                  {% else %} 
+                                      {% if block.settings.mega_image_header_1 != empty %}
+                                          {% capture img_alt %}{{ block.settings.mega_image_header_1 }}{% endcapture %}
+                                      {% else %}
+                                          {% capture img_alt %}{{ shop.name }}{% endcapture %}
                                       {% endif %}
-                                    {% endfor %}
-                              {% endif %}  
-                              {% endcomment %}
-                              
-                          {% comment %}
-                              {% assign all_tags_array = all_tags | split: ',' | uniq %}
-                              {% for tag in all_tags_array %}
-                                {% if tag != '' %}
-                                  <li class="mobile-nav__item">
-                                    <a href="/collections/{{ collection.handle }}/?filter.p.tag={{ tag }}" class="mobile-nav__link">{{ tag | capitalize }}</a>
-                                  </li>
-                                {% endif %}
-                              {% endfor %}
-                            {% endcomment %}
-                              
-                            </ul>
-                           {% endif %}
+                                  {% endif %}
+                        
+                                  {% render 'responsive-image' with block.settings.mega_image_1, allow_stretch: image_1_stretch, alt: img_alt | escape, props: img_props %}
+                                  {% if block.settings.mega_image_link_1 %}
+                                    </a>
+                                  {% else %}
+                                    </div>
+                                  {% endif %}
+                        
+                                  <div class="mega-menu--text">
+                                    {% if block.settings.mega_image_header_1 %}
+                                      <p class="h4 mega-menu--image-title{% if block.settings.mega_image_subheader_1 != blank %} has-padding{% endif %}{% if block.settings.overlay_text_on_image_promo_1 %} overlay-text-on-image-promo-1{% else %} default-menu-drawer-text-color{% endif %}">
+                                        {% if block.settings.mega_image_link_1 %}
+                                          <a href="{{ block.settings.mega_image_link_1 }}" class="{% if block.settings.overlay_text_on_image_promo_1 %} overlay-text-on-image-promo-1{% else %} default-menu-drawer-text-color{% endif %}">
+                                        {% endif %}
+                                        {{ block.settings.mega_image_header_1 }}
+                                        {% if block.settings.mega_image_link_1 %}
+                                          </a>
+                                        {% endif %}
+                                      </p>
+                                    {% endif %}
+                                    {% if block.settings.mega_image_subheader_1 %}
+                                      <p class="h5 mega-menu--image-subtitle{% if block.settings.overlay_text_on_image_promo_1 %} overlay-text-on-image-promo-1{% else %} default-menu-drawer-text-color{% endif %}">
+                                        {% if block.settings.mega_image_link_1 %}
+                                          <a href="{{ block.settings.mega_image_link_1 }}" class="{% if block.settings.overlay_text_on_image_promo_1 %} overlay-text-on-image-promo-1{% else %} default-menu-drawer-text-color{% endif %}">
+                                        {% endif %}
+                                        {{ block.settings.mega_image_subheader_1 }}
+                                        {% if block.settings.mega_image_link_1 %}
+                                          </a>
+                                        {% endif %}
+                                      </p>
+                                    {% endif %}
+                                  </div>
+                                </div>
+                              </div>
+                            </li>
                           {% endif %}
-                      </li>
+                          
+                          {% if block.settings.mega_image_2 and block.settings.show_promo_2_in_mobile_drawer %}
+                            <li class="mobile-nav__item block-id-{{ block.id }}">
+                              <div class="inner mega-menu--image-wrapper">
+                                <div class="mega-menu--image{% if block.settings.overlay_text_on_image_promo_2 %} overlay--enabled{% endif %}{% if second_promo_has_text %} has-promo-text{% endif %}">
+                                  {% if block.settings.mega_image_link_2 %}
+                                    <a class="mega-menu-promo--image{% if image_2_crop %} mega-menu-aspect-ratio {{ image_2_crop }}{% endif %}" href="{{ block.settings.mega_image_link_2 }}">
+                                  {% else %}
+                                    <div class="mega-menu-promo--image{% if image_2_crop %} mega-menu-aspect-ratio {{ image_2_crop }}{% endif %}">
+                                  {% endif %}
+                                  {% capture img_props %}style="max-width: {{ block.settings.mega_image_2.width }}px"{% endcapture %}
+                        
+                                  {% if block.settings.mega_image_2.alt != empty %}
+                                      {% capture img_alt %}{{ block.settings.mega_image_2.alt }}{% endcapture %}
+                                  {% else %} 
+                                      {% if block.settings.mega_image_header_2 != empty %}
+                                          {% capture img_alt %}{{ block.settings.mega_image_header_2 }}{% endcapture %}
+                                      {% else %}
+                                          {% capture img_alt %}{{ shop.name }}{% endcapture %}
+                                      {% endif %}
+                                  {% endif %}
+                        
+                                  {% render 'responsive-image' with block.settings.mega_image_2, allow_stretch: image_2_stretch, alt: img_alt | escape, props: img_props %}
+                                  {% if block.settings.mega_image_link_2 %}
+                                    </a>
+                                  {% else %}
+                                    </div>
+                                  {% endif %}
+                        
+                                  <div class="mega-menu--text">
+                                    {% if block.settings.mega_image_header_2 %}
+                                      <p class="h4 mega-menu--image-title{% if block.settings.mega_image_subheader_2 != blank %} has-padding{% endif %}{% if block.settings.overlay_text_on_image_promo_2 %} overlay-text-on-image-promo-2{% else %} default-menu-drawer-text-color{% endif %}">
+                                        {% if block.settings.mega_image_link_2 %}
+                                          <a href="{{ block.settings.mega_image_link_2 }}" class="{% if block.settings.overlay_text_on_image_promo_2 %} overlay-text-on-image-promo-2{% else %} default-menu-drawer-text-color{% endif %}">
+                                        {% endif %}
+                                        {{ block.settings.mega_image_header_2 }}
+                                        {% if block.settings.mega_image_link_2 %}
+                                          </a>
+                                        {% endif %}
+                                      </p>
+                                    {% endif %}
+                                    {% if block.settings.mega_image_subheader_2 %}
+                                      <p class="h5 mega-menu--image-subtitle{% if block.settings.overlay_text_on_image_promo_2 %} overlay-text-on-image-promo-2{% else %} default-menu-drawer-text-color{% endif %}">
+                                        {% if block.settings.mega_image_link_2 %}
+                                          <a href="{{ block.settings.mega_image_link_2 }}" class="{% if block.settings.overlay_text_on_image_promo_2 %} overlay-text-on-image-promo-2{% else %} default-menu-drawer-text-color{% endif %}">
+                                        {% endif %}
+                                        {{ block.settings.mega_image_subheader_2 }}
+                                        {% if block.settings.mega_image_link_2 %}
+                                          </a>
+                                        {% endif %}
+                                      </p>
+                                    {% endif %}
+                                  </div>
+                                </div>
+                              </div>
+                            </li>
+                          {% endif %}
+                        {% endif %}
+                      {% endif %}
                     {% endfor %}
-                  {% endif %}
+                  </ul>
                 </ul>
-                
               {% else %}
-                <div class="mobile-nav__has-sublist">
-                  <a href="{{ link.url }}" class="mobile-nav__link">{{ link.title }}</a>
-                </div>
+                <a href="{{ link.url }}" class="mobile-nav__link">{{ link.title }}</a>
               {% endif %}
             </li>
           {% endif %}
         {% endfor %}
       </ul>
 
-
-                                      
       <div class="mobile-nav--footer">
         <div class="mobile-nav locale--mobile">
           {{ locale }}
@@ -622,7 +656,7 @@ Testing Cypress integration
             }
           {% endif %}
         {% endstyle %}
-        <ul class="custom-styling mobile-nav nav--meta{% unless shop.customer_accounts_enabled or social_icons %} hidden{% endunless %}">
+        <ul class="mobile-nav nav--meta{% unless shop.customer_accounts_enabled or social_icons %} hidden{% endunless %}">
           {% if shop.customer_accounts_enabled %}
             {% if customer %}
               <li class="mobile-nav__item customer--info">
@@ -637,13 +671,8 @@ Testing Cypress integration
                 {{ 'layout.customer.log_out' | t | customer_logout_link }}
               </li>
             {% else %}
-              <li class="mobile-nav__item customer-login-link login-signup-links custom-styling">
-                {{ 'layout.customer.access_account' | t | customer_login_link }}
-                {% comment %}
-                  {{ 'layout.customer.log_in' | t | customer_login_link }}
-                  <span class=custom-spacer>/</span> 
-                  {{ 'layout.customer.register' | t | customer_register_link }}
-                {% endcomment %}
+              <li class="mobile-nav__item customer-login-link">
+                {{ 'layout.customer.log_in' | t | customer_login_link }}
               </li>
             {% endif %}
           {% endif %}
@@ -770,16 +799,6 @@ Testing Cypress integration
       </div>
 
       <div class="site-header__wrapper__right top-links">
-        <div class="site-header__wrapper__left right-menu-desk">
-          {% if section.settings.logo-placement == 'left' %}
-            {{ header_logos }}
-          {% elsif section.settings.logo-placement == 'center' and site_nav_right != blank %}
-            {{ site_nav_right }}
-          {% else %}
-            {{ locale }}
-          {% endif %}
-        </div>
-        
         {% if section.settings.logo-placement == 'left' %}
           {{ site_nav }}
           {{ locale }}
@@ -828,13 +847,6 @@ Testing Cypress integration
               </a>
               {% endif %}
 
-              <a href="#swym-wishlist" class="wishlist-header">
-                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" width="24" height="24">
-                  <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41 1.01 4.5 2.09C13.09 4.01 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>                
-                <!-- <img height="" width="" src="{{ 'heart.png' | asset_url }}" alt="Logo" /> -->
-              </a>              
-
               <a href="{{ routes.cart_url }}" aria-label="{{ 'layout.cart.title' | t }}" class="{% if settings.cart_type == 'drawer' %}js-drawer-open-right-link {% endif %}site-nav__link{% if section.settings.cart_count %} cart-count-enabled {{ section.settings.cart-style }}{% endif %}{% if cart.item_count > 0 %} cart-count-visible{% endif %} standalone-icon--wrapper{% if section.settings.show_icons %} header-icons-enabled{% endif %}" aria-controls="CartDrawer" aria-expanded="false">
                 <span class="icon-fallback-text">
                   {% render 'theme-icon' with icon: section.settings.cart-style, iconClasses: 'fa-2x' %}
@@ -852,196 +864,6 @@ Testing Cypress integration
   </nav>
 </div>
 
-
-<script>
-  
-  jQuery(function(){
-
-    function customAnimateFunction($el,opacity,margin,delay){
-        jQuery($el).each(function(index) {
-            jQuery(this).delay(delay * index).animate({
-                opacity: opacity,
-                marginLeft: margin
-            }, 600);
-        });
-    }     
-
-
-
-     jQuery('.level-third-menu').click(function(e) {
-       e.preventDefault();
-       
-       let element = jQuery(this).closest('.custom-submenu').find('li');
-       customAnimateFunction(element,0,-20,200);
-       // jQuery(this).closest('.mob-top-level-menu').find('.mobile-nav__has-sublist:not(.third-level-mobile-nav)').addClass('mobile-nav--expanded-new');
-       
-       // jQuery(this).closest('li.mobile-nav__item').find('.mobile-nav__has-sublist').removeClass('mobile-nav--expanded');
-       // let element2 = jQuery(this).closest('.mob-top-level-menu').find('.custom-submenu > li');
-       // customAnimateFunction(element2,1,0,200);
-       // console.log(jQuery(this).closest('li.mobile-nav__item').find('.mobile-nav__has-sublist'));
-     });
-    
-    
-     jQuery('.third-level-menu-open').click(function(e) {
-       e.preventDefault();
-       
-       let element = jQuery(this).closest('.mobile-nav__item').find('.submenu-level-third > li')
-       customAnimateFunction(element,1,0,200);
-    
-     });    
-
-      jQuery('.show-tags > .mobile-nav__toggle-open').click(function() {
-          jQuery('.mobile-nav__sublist_custom').not(jQuery(this).closest('li').find('.mobile-nav__sublist_custom')).slideUp('slow');
-          jQuery('.tags-sublist').not(jQuery(this).closest('.tags-sublist')).removeClass('mobile-nav--expanded');
-          jQuery(this).closest('li').find('.mobile-nav__sublist_custom').slideDown('slow');
-      });
-
-      jQuery('.show-tags > .mobile-nav__toggle-close').click(function() {
-          jQuery(this).closest('li').find('.mobile-nav__sublist_custom').slideUp('slow');
-      });
-
-    
-    
-    jQuery(document).on('click','.close-submenu',function(){
-      jQuery(this).closest('.mob-top-level-menu').find('.mobile-nav__has-sublist').removeClass('mobile-nav--expanded');
-
-      jQuery(this).closest('.mobile-nav__sublist').find('li').each(function(index) {
-          jQuery(this).delay(100 * index).animate({
-              opacity: 0,
-              marginLeft: -20
-          }, 500);
-      });
-
-      element = jQuery(this).closest('.mobile-nav--main').find('.mob-top-level-menu > .mobile-nav__has-sublist');
-      customAnimateFunction(element,1,0,200);
-
-      jQuery('.show-tags > .mobile-nav__toggle-open').closest('li').find('.mobile-nav__sublist_custom').slideUp('slow');
-      
-    }); 
-
-    
-    jQuery(document).on('click', '.mob-top-level-menu .mobile-nav__toggle > button', function() {
-        jQuery(this).closest('.mob-top-level-menu').find('.mobile-nav__sublist.custom-submenu > li').each(function(index) {
-            jQuery(this).delay(100 * index).animate({
-                opacity: 1,
-                marginLeft: 0
-            }, 500);
-        });
-
-        element = jQuery(this).closest('.mobile-nav--main').find('.mob-top-level-menu > .mobile-nav__has-sublist');
-        customAnimateFunction(element,0,-20,100);
-      
-    });
-
-    jQuery(document).on('click', '.site-nav--mobile > button', function() {
-
-        customAnimateFunction('li.mob-top-level-menu',1,0,200);
-      
-        element = jQuery('.mobile-nav--main').find('.mob-top-level-menu > .mobile-nav__has-sublist');
-        customAnimateFunction(element,1,0,200);
-      
-    });
-
-
-    jQuery(document).on('click','.mobile-menu--close-btn, .header-section--wrapper > #NavDrawerOverlay',function(){
-      if(jQuery('.mobile-nav__has-sublist').hasClass('mobile-nav--expanded')) {
-        jQuery('.mobile-nav__has-sublist').removeClass('mobile-nav--expanded');
-      }
-
-        customAnimateFunction('li.mob-top-level-menu',0,-20,100);
-
-        element = jQuery('.mobile-nav--main').find('.mob-top-level-menu > .mobile-nav__has-sublist');
-        customAnimateFunction(element,0,-20,100);
-
-      jQuery('.show-tags > .mobile-nav__toggle-open').closest('li').find('.mobile-nav__sublist_custom').slideUp('slow');
-      
-    });
-    
-    jQuery('ul.menu-link li:first-child a').addClass('active');
-    
-    jQuery(".animated-link--item").hover(function(e){
-        e.preventDefault();
-        let data_id = jQuery(this).data('id');
-        jQuery('ul.menu-link li a').removeClass('active');
-        jQuery(this).addClass('active');
-      
-        jQuery("#"+data_id+" .collection-image").hide();
-        let collection_image_id = jQuery(this).data('collection');
-        if( collection_image_id ) {
-          jQuery("#"+collection_image_id).css('display','flex');         
-        }
-
-        jQuery(".tags-list .products-tags-list").hide();
-        let tags_list_id = jQuery(this).data('collection');
-        if( tags_list_id ) {
-          jQuery("#"+tags_list_id+"-tag").css('display','block');         
-        }      
-    });
-
-// Remove Focus from Header
-    jQuery(document).on('click','.hs-bg-slide-cart, .hs-continue-shopping, .hs-close, a.wishlist-header', function(){
-      var hiddenElement = document.createElement('div');
-      hiddenElement.setAttribute('tabindex', '-1'); // Make it focusable
-      document.body.insertBefore(hiddenElement, document.body.firstChild);
-    
-      hiddenElement.focus();
-      document.body.removeChild(hiddenElement);
-
-      // Remove js-drawer-open-right class
-        if (jQuery('body').hasClass('js-drawer-open-right')) {
-          jQuery('body').removeClass('js-drawer-open-right');
-          jQuery('body').removeClass('js-drawer-open');
-        }
-
-        if (jQuery('body').hasClass('remove-side-cart')) {
-          jQuery('body').removeClass('remove-side-cart');
-          jQuery('.right-drawer-vue').hide();
-        }
-    });
-
-    jQuery(document).on('click','a.quick-add-button-variants', function(){
-      jQuery('body').addClass('remove-side-cart');
-      jQuery('.right-drawer-vue').show();
-    });
-    jQuery(document).on('click','ul.site-header__links a.search-button', function(){
-      jQuery('.right-drawer-vue').show();
-    });
-
-// Delete Cookie to display Newsletter form
-    function deleteCookie(name) {
-        document.cookie = name + '=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
-    }
-    deleteCookie('__kla_id');
-
-// Removing classes for reviews    
-    function removeAllClasses() {
-        jQuery('.jdgm-form__rating a').removeClass();
-        jQuery('.jdgm-form__rating a').addClass('jdgm-star jdgm--off');
-    }
-    jQuery('a.jdgm-write-rev-link.close-form-btn, a.jdgm-btn.jdgm-cancel-rev').on('click', removeAllClasses);   
-
-  
-    jQuery('a.log-in-button').on('click', function(event){
-      event.preventDefault();
-      window.localStorage.removeItem('resettingPassword');
-      window.location.href = window.location.origin+'/account/login';
-    });
-
-// Always Active First Tab in Mega Menus
-    jQuery('#AccessibleNav .mega-menu').hover(function(){
-      jQuery('.mega-menu--links .menu-collection > a').removeClass('active');
-      jQuery('#collections-tags .products-tags-list').css('display','none');
-  
-      jQuery('.mega-menu--links .menu-collection:first-child > a').addClass('active');
-      jQuery('#collections-tags .products-tags-list:first-child').css('display','block');    
-      }, function(){
-      jQuery('.mega-menu--links .menu-collection > a').removeClass('active');
-      jQuery('#collections-tags .products-tags-list').css('display','none');    
-    });    
-      
-  });
-</script>
-
 <style>
 
   :root {
@@ -1055,7 +877,7 @@ Testing Cypress integration
   }
 
   .site-title{
-  	padding: {{ section.settings.logo_padding }}px 0;
+    padding: {{ section.settings.logo_padding }}px 0;
   }
 
   @media screen and (max-width: 989px) {
@@ -1146,15 +968,6 @@ Testing Cypress integration
   "name": "t:sections.header.name",
   "class": "header-section",
   "settings": [
-     {
-      "type": "header",
-      "content": "Featured Collection"
-    },
-    {
-      "type": "collection_list",
-      "id": "featured_collection",
-      "label": "Featured Collection"
-    },  
     {
       "type": "checkbox",
       "id": "sticky_header",
@@ -1348,11 +1161,6 @@ Testing Cypress integration
       "default": "main-menu"
     },
     {
-      "type": "link_list",
-      "id": "main_linklist_right",
-      "label": "Header Right Menu"
-    },    
-    {
       "type": "select",
       "id": "dropdown_alignment",
       "label": "t:sections.header.settings.dropdown_alignment.label",
@@ -1384,15 +1192,6 @@ Testing Cypress integration
           "label": "t:all.Menu_item",
           "info": "t:sections.header.blocks.content.settings.mega-menu.info"
         },
-        {
-          "type": "header",
-          "content": "Featured Collection"
-        },
-        {
-          "type": "collection_list",
-          "id": "featured_collection",
-          "label": "Featured Collection"
-        },        
         {
           "type": "header",
           "content": "t:sections.header.blocks.content.settings.header-1.content"
