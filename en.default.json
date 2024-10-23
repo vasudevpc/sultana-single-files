@@ -28,8 +28,8 @@
       "required_dropdown_error_with_label": "Please select an option from the \"{{ label }}\" dropdown.",
       "max_filesize_20mb": "Max file size: 20MB.",
       "max_filesize_error": "This file is too large. The maximum file size is 20MB.",
-      "quantity_max_error": "All available inventory for {{ variant }} has been added to the cart.",
-      "choose_an_option": "Choose an option"
+      "choose_an_option": "Choose an option",      
+      "quantity_max_error": "All available inventory for {{ variant }} has been added to the cart."
     },
     "continue_shopping": "Continue shopping",
     "breadcrumbs": {
@@ -54,7 +54,7 @@
       "no_results_html": "Your search for \"{{ terms }}\" did not yield any results.",
       "results_for_html": "Your search for \"{{ terms }}\" revealed the following:",
       "title": "Search",
-      "placeholder": "Search our store",
+      "placeholder": "What are you looking for?",
       "submit": "Search",
       "products": "Products",
       "articles": "Articles",
@@ -192,17 +192,17 @@
       "add_gift_note": "Add gift message",
       "edit_gift_note": "Edit gift message",
       "save_gift_note": "Save gift message",
-      "save": "Save",
+      "save": "Save",      
       "see_more": "See more",
       "subtotal": "Subtotal",
       "regular_subtotal": "Regular subtotal",
-      "sale_subtotal": "Sale subtotal",
+      "sale_subtotal": "Sale subtotal",      
       "taxes_and_shipping_at_checkout": "Taxes and shipping calculated at checkout",
       "taxes_and_shipping_policy_at_checkout_html": "Taxes and <a href=\"{{ link }}\">shipping</a> calculated at checkout",
       "taxes_included_but_shipping_at_checkout": "Tax included and shipping calculated at checkout",
       "taxes_included_and_shipping_policy_html": "Tax included. <a href=\"{{ link }}\">Shipping</a> calculated at checkout.",
       "update": "Update cart",
-      "checkout": "Checkout",
+      "checkout": "Check out",
       "empty": "Your cart is currently empty.",
       "close_cart": "Close cart",
       "view_cart": "View cart",
@@ -271,7 +271,7 @@
       "clear_all": "Clear all",
       "empty": "No products found",
       "from": "From",
-      "filter_and_sort": "Filter/Sort",
+      "filter_and_sort": "Filter and sort",
       "filter_by_label": "Filter by",
       "filter_button": "Filter",
       "filters_selected": {
@@ -458,6 +458,8 @@
       "logged_in_as_html": "Logged in as {{ first_name }}",
       "log_out": "Log out",
       "log_in": "Log in",
+      "register": "Sign up",
+      "access_account": "Login",
       "create_account": "Create account"
     },
     "header": {
@@ -494,7 +496,7 @@
       "compare_at": "Compare at",
       "quantity": "Quantity",
       "add_to_cart": "Add to cart",
-      "view_options": "View options",
+      "view_options": "Add to cart",
       "added": "Added",
       "add": "Add",
       "loading": "Loading",
@@ -542,11 +544,14 @@
     "issued": {
       "heading": "Here's your gift card!",
       "heading_guest": "Here's your gift card {{ customer }}!",
-      "heading_print": "Here's your gift card for {{ shop_name }}!",
+      "heading_print": "Here's your gift card for {{ shop_name }}!",      
+      "title": "Here's your {{ value }} gift card for {{ shop }}!",
+      "subtext": "Here's your gift card!",
       "disabled": "Disabled",
       "expired": "Expired",
       "expires": "Expires",
-      "redeem": "Use this code to redeem your gift card at checkout",
+      "redeem": "Use this code to redeem your gift card at checkout",      
+      "active": "Expires on {{ expiry }}",
       "shop_link": "Start shopping",
       "print": "Print",
       "add_to_apple_wallet": "Add to Apple Wallet",
@@ -554,7 +559,7 @@
       "copy": "Copy",
       "placeholder_expiry_date": "12.3.28",
       "qr_code_text": "or QR code in store:",
-      "qr_image_alt": "QR code — scan to redeem gift card"
+      "qr_image_alt": "QR code — scan to redeem gift card"      
     },
     "recipient": {
       "checkbox": "I want to send this as a gift",
@@ -576,6 +581,14 @@
       "store_owner_html": "<a href=\"/admin\">Log in here</a>",
       "continue": "Continue",
       "powered_by_html": "This store will be powered by <a href=\"http://www.shopify.com\">Shopify</a>"
+    }
+  },
+  "shopify": {
+    "checkout": {
+      "marketing": {
+        "accept_marketing_checkbox_label": "Get order updates on Whatsapp",
+        "post_accept_marketing_checkbox_label": "You are subscribed to rreceivin updates via Whatsapp/email/sms."
+      }
     }
   }
 }
