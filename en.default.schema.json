@@ -37,9 +37,6 @@
         "sold_out_badge_color": {
           "label": "'Sold out' badge background"
         },
-        "preorder_badge_color": {
-          "label": "'Preorder' badge background"
-        },
         "custom_badge_color": {
           "label": "Custom badge background"
         },
@@ -72,7 +69,7 @@
           "content": "Color schemes"
         },
         "header-35": {
-          "content": "Drawers"
+          "content": "Cart drawer"
         },
         "header-38": {
           "content": "Footer"
@@ -126,28 +123,18 @@
             "go_to_or_open_cart": "Go to/open cart"
           }
         },
+        "cart_vendor_enable": {
+          "label": "Show product vendor"
+        },
         "cart_notes_enable": {
-          "label": "Show order note"
+          "label": "Enable cart notes"
         },
         "giftwrap_gift_note": {
-          "label": "Show gift message"
+          "label": "Enable gift message"
         },
         "enable-additional-checkout-buttons": {
-          "label": "Show dynamic checkout buttons on cart page",
+          "label": "Enable dynamic checkout buttons",
           "info": "[Learn more](https://help.shopify.com/en/manual/sell-online/online-store/dynamic-checkout)"
-        },
-        "product_recommendations": {
-          "header": "Product recommendations",
-          "show_cart_recommendations": {
-            "label": "Show dynamic recommendations",
-            "info": "Dynamic recommendations are based on the products in the cart. They use order and product information to change and improve over time. [Learn more](https://help.shopify.com/themes/development/recommended-products)"
-          }
-        },
-        "empty_cart": {
-          "header": "Empty cart",
-          "empty_cart_message": "Message",
-          "empty_cart_collections": "Suggested collections",
-          "empty_cart_products": "Product recommendations"
         }
       }
     },
@@ -211,13 +198,13 @@
         "product_card_swatches": {
           "label": "Color swatches",
           "color_swatch_info": {
-            "content": "To create swatches go to ‘Theme settings > Swatches’."
+            "content": "To show color swatches you must have a variant option name of one of the following: color, colour, couleur, color, farbe, 색 ,色 ,färg ,farve. You may need to upload custom swatch images. [Learn more](https://support.eightthemes.com/hc/en-us/articles/360020105257-How-to-Upload-Color-Swatches)"
           },
           "show_color_swatches": {
-            "label": "Show swatches"
+            "label": "Show color swatches"
           },
           "show_color_label": {
-            "label": "Show labels"
+            "label": "Show color label"
           }
         },
         "quick_shop_button": {
@@ -243,23 +230,6 @@
             "above": "Above",
             "none": "None"
           }
-        }
-      }
-    },
-    "swatches": {
-      "name": "Swatches",
-      "info": "Swatches can be created using Category metafields or Variant images. [Learn more](https://support.eightthemes.com/hc/en-us/articles/27864028041745-How-to-set-up-swatches)",
-      "settings": {
-        "swatch_style": {
-          "name": "Swatch style",
-          "options": {
-            "circle": "Circle",
-            "square": "Square"
-          }
-        },
-        "show_variant_image_for_options": {
-          "label": "Show variant image for options",
-          "info": "To use variant images for swatches use a comma separated list with the Option names you want to create swatches for (e.g. 'Material,Color,Flavour,Chain-length'). [Learn more](https://support.eightthemes.com/hc/en-us/articles/27864028041745-How-to-set-up-swatches#h_01J6YT6WM2K14R01JJCHJ0QKSJ)"
         }
       }
     },
@@ -362,14 +332,6 @@
         },
         "share_pinterest": {
           "label": "Pin on Pinterest"
-        }
-      }
-    },
-    "price": {
-      "name": "Price",
-      "settings": {
-        "show_currency_codes": {
-          "label": "Show currency codes"
         }
       }
     },
@@ -676,12 +638,8 @@
     "blog--navigation-banner": {
       "name": "Navigation banner",
       "settings": {
-        "navigation": {
-          "paragraph": "Display a Menu (edited in Online store > Navigation > Menus) or a Collection list. Use metafields to show specific Collection lists based on the location. [Learn more](https://support.eightthemes.com/hc/en-us/articles/26904250141201-How-to-use-metafields-in-the-Navigation-banner-section)"
-        },
         "navigation_position": {
-          "label": "Navigation alignment",
-          "info": "When Style is set to 'Grid'"
+          "label": "Navigation alignment"
         }
       },
       "blocks": {
@@ -822,8 +780,6 @@
       "label": "Font",
       "name": "Featured collection",
       "settings": {
-        "view_all_button": "View all button",
-        "view_all_button_info": "To change 'Quick shop' or slider navigation buttons go to 'Theme settings > Product cards'",
         "show_view_all": {
           "label": "Show 'View all' button"
         },
@@ -833,6 +789,21 @@
       },
       "presets": {
         "name": "Featured collection"
+      }
+    },
+    "collection--bestsalling-products": {
+      "label": "Font",
+      "name": "Best Salling Products",
+      "settings": {
+        "show_view_all": {
+          "label": "Show 'View all' button"
+        },
+        "buttons_style": {
+          "info": "To change 'Quick shop' button go to 'Theme settings' > 'Product cards' > 'Quick shop button'"
+        }
+      },
+      "presets": {
+        "name": "Best Salling Products"
       }
     },
     "countdown": {
@@ -850,9 +821,6 @@
         },
         "background_color": {
           "info": "Visible when no 'Image' selected."
-        },
-        "override_button_colors": {
-          "info": "Overriding will enable the color settings below (except when using an image on mobile)."
         }
       },
       "blocks": {
@@ -899,7 +867,6 @@
     "customer-login": {
       "name": "Login",
       "settings": {
-        "enable_shop_login_button": "Enable Sign in with Shop"
       },
       "blocks": {
       }
@@ -1085,35 +1052,8 @@
       }
     },
     "gift-card": {
-      "name": "Gift card",
-      "settings": {
-        "gift_card_preview": "Gift card preview",
-        "show_gift_card_preview": {
-          "label": "Show gift card preview"
-        },
-        "show_qr_code": {
-          "label": "Show QR code",
-          "info": "For in-person use. This can be scanned with the front-facing camera of the device that you use the Shopify POS app on or use a supported 2D barcode scanner."
-        },
-        "images": {
-          "header_image": {
-            "label": "Header image"
-          },
-          "paragraph": "You can also show this image on ‘Gift card receipt’ and ‘New gift card’ email notifications. [Learn more](https://www.notion.so/Docs-FAQ-5b752b504bc946bf9ea38a3649fab0e2?pvs=4)",
-          "gift_card_image": {
-            "label": "Gift card image",
-            "info": "900 x 600px recommended"
-          },
-          "background_image_desktop": {
-            "label": "Background image (desktop)"
-          },
-          "background_image_mobile": {
-            "label": "Background image (mobile)"
-          }
-        },
-        "color": {
-          "info": "Shown when not using an image."
-        }
+      "name": "Header",
+      "blocks": {
       }
     },
     "header": {
@@ -1189,7 +1129,7 @@
           "name": "Mega menu",
           "settings": {
             "mega-menu": {
-              "info": "Enter an existing menu item to apply a mega menu dropdown. [Learn more](https://support.eightthemes.com/hc/en-us/articles/25140032079633-How-to-set-up-a-mega-menu)"
+              "info": "Enter an existing menu item to apply a mega menu dropdown. [Learn more](https://support.eightthemes.com/hc/en-us/articles/360020104997-How-to-Set-Up-a-Mega-Menu)"
             },
             "header-1": {
               "content": "Promotion one"
@@ -1226,21 +1166,6 @@
       },
       "presets": {
         "name": "Gallery"
-      }
-    },
-    "gallery-slideshow": {
-      "name": "Gallery slideshow",
-      "settings": {
-        "images_per_row": {
-          "label": "Images per row"
-        },
-        "show_on_hover": {
-          "label": "Show on hover",
-          "info": "Does not apply to 'Below image'"
-        }
-      },
-      "blocks": {
-        "paragraph": "The following settings apply when text overlays the image."
       }
     },
     "image--image-with-text-overlay": {
@@ -1471,29 +1396,6 @@
         }
       }
     },
-    "image-with-text-slideshow": {
-      "name": "Image with text slideshow",
-      "settings": {
-        "navigation_button_color": {
-          "label": "Navigation button color",
-          "settings": {
-            "override_navigation_button_colors": {
-              "label": "Override navigation button colors",
-              "info": "Overriding will enable the color settings below"
-            },
-            "primary_color": {
-              "label": "Primary color"
-            },
-            "secondary_color": {
-              "label": "Secondary color",
-              "info": "Only applies to text when Button style is ‘Filled’"
-            }
-          }
-        },
-        "minimum_image_height": "Minimum image height",
-        "image_info": "1000 x 750px recommended"
-      }
-    },
     "store-availability": {
       "name": {
       },
@@ -1676,10 +1578,10 @@
       }
     },
     "template--product--description": {
-      "name": "Product details",
+      "name": "Product description",
       "settings": {
         "enable_readmore": {
-          "label": "Enable 'read more' for description (deprecated)"
+          "label": "Enable 'read more' for description"
         }
       },
       "blocks": {
@@ -1690,14 +1592,10 @@
       "name": "Info columns",
       "settings": {
         "columns_per_row": {
-          "label": "Columns per row"
+          "label": "Columns per row on desktop"
         },
         "vertical_alignment": {
           "label": "Vertical alignment"
-        },
-        "image_or_video": {
-          "label": "Image/video",
-          "maximum_width": "Maximum width"
         }
       },
       "blocks": {
@@ -1708,6 +1606,7 @@
           "name": "Video and text",
           "settings": {
             "grid_video_size": {
+              "label": "Video size",
               "options": {
                 "tall": "Tall (9:16)",
                 "wide": "Wide (16:9)"
@@ -1739,6 +1638,11 @@
         "name": "Product recommendations"
       }
     },
+    "template--product-recently-used-grid": {
+      "name": "Recently viewed",
+      "blocks": {
+      }
+    },
     "template--product": {
       "label": "Bottom margin",
       "name": "Product",
@@ -1747,7 +1651,7 @@
           "label": "Enable sticky content on desktop"
         },
         "image_size": {
-          "info": "Recommended 950px minimum width. [Learn more](https://support.eightthemes.com/hc/en-us/articles/25142554011793-Images)"
+          "info": "Recommended 950px minimum width. [Learn more](https://support.eightthemes.com/hc/en-us/articles/360020257118-Image-Dimensions)"
         },
         "image-display": {
           "label": "Secondary media display",
@@ -1766,10 +1670,6 @@
         },
         "header-8": {
           "content": "App block spacing"
-        },
-        "preorder": {
-          "preorder": "Preorder",
-          "info_text": "Add a tag of 'Preorder' to any product to set the Buy button wording to 'Preorder'. [Learn more](https://support.eightthemes.com/hc/en-us/articles/25232847289745-How-to-set-up-a-Preorder-product)"
         },
         "app_margin_bottom": {
           "info": "Control to spacing below your installed app blocks that display in the product form"
@@ -1793,12 +1693,8 @@
           "name": "Vendor"
         },
         "options": {
-          "name": "Variant picker",
+          "name": "Options",
           "settings": {
-            "variant_style": {
-              "info": "To create swatches go to ‘Theme settings > Swatches’.",
-              "swatch_info": "Visual swatches can be created using Category metafields or Variant images. [Learn more](https://support.eightthemes.com/hc/en-us/articles/27864028041745-How-to-set-up-swatches)"
-            },
             "thumbnail_changes_variant": {
               "label": "Change variant based on the thumbnail"
             },
@@ -1806,8 +1702,7 @@
               "label": "Size guide page"
             },
             "size_option_name": {
-              "label": "Show on specified option",
-              "info": "E.g. ‘Size’."
+              "label": "Show on a specified variant option"
             },
             "header-3": {
               "content": "Size guide"
@@ -1824,7 +1719,7 @@
               "label": "Swatches size"
             },
             "paragraph-4": {
-              "content": "We recommend using metafields. [Learn more](https://support.eightthemes.com/hc/en-us/articles/16547811310609-How-to-set-up-linked-products)"
+              "content": "We recommend using metafields. [Learn more](https://support.eightthemes.com/hc/en-us/articles/12573137881617)"
             }
           }
         },
@@ -1929,96 +1824,6 @@
               "label": "No rating label"
             }
           }
-        },
-        "custom_checkbox": {
-          "label": "Customize - Checkbox",
-          "settings": {
-            "label": "Checkbox",
-            "paragraph": {
-              "content": "Collect customization information for an item added to the cart. [Learn more](https://support.eightthemes.com/hc/en-us/articles/25697916845841-How-to-Add-Custom-Fields-to-Product-Pages-Text-Fields-Radio-Buttons-Uploads-Checkbox-and-Dropdowns)"
-            },
-            "required": {
-              "label": "Required",
-              "info": "If checked, the customer will need to complete this field before they can add to cart."
-            }
-          }
-        },
-        "custom_dropdown": {
-          "label": "Customize - Dropdown",
-          "settings": {
-            "label": "Dropdown",
-            "paragraph": {
-              "content": "Collect customization information for an item added to the cart. [Learn more](https://support.eightthemes.com/hc/en-us/articles/25697916845841-How-to-Add-Custom-Fields-to-Product-Pages-Text-Fields-Radio-Buttons-Uploads-Checkbox-and-Dropdowns)"
-            },
-            "required": {
-              "label": "Required",
-              "info": "If checked, the customer will need to complete this field before they can add to cart."
-            },
-            "options": {
-              "label": "Options",
-              "info": "Separate your options with a comma (e.g: Option 1, Option 2, Option 3).",
-              "default": "Yes, No"
-            }
-          }
-        },
-        "custom_file_upload": {
-          "label": "Customize - File upload",
-          "settings": {
-            "label": "File upload",
-            "paragraph": {
-              "content": "Collect customization information for an item added to the cart. [Learn more](https://support.eightthemes.com/hc/en-us/articles/25697916845841-How-to-Add-Custom-Fields-to-Product-Pages-Text-Fields-Radio-Buttons-Uploads-Checkbox-and-Dropdowns)"
-            },
-            "required": {
-              "label": "Required",
-              "info": "If checked, the customer will need to complete this field before they can add to cart."
-            }
-          }
-        },
-        "custom_radio_button": {
-          "label": "Customize - Radio",
-          "settings": {
-            "label": "Radio buttons",
-            "paragraph": {
-              "content": "Collect customization information for an item added to the cart. [Learn more](https://support.eightthemes.com/hc/en-us/articles/25697916845841-How-to-Add-Custom-Fields-to-Product-Pages-Text-Fields-Radio-Buttons-Uploads-Checkbox-and-Dropdowns)"
-            },
-            "required": {
-              "label": "Required",
-              "info": "If checked, the customer will need to complete this field before they can add to cart."
-            },
-            "options": {
-              "label": "Options",
-              "info": "Separate your options with a comma (e.g: Option 1, Option 2, Option 3).",
-              "default": "Yes, No"
-            }
-          }
-        },
-        "custom_text_field": {
-          "label": "Customize - Text field",
-          "settings": {
-            "label": "Text field",
-            "paragraph": {
-              "content": "Collect customization information for an item added to the cart. [Learn more](https://support.eightthemes.com/hc/en-us/articles/25697916845841-How-to-Add-Custom-Fields-to-Product-Pages-Text-Fields-Radio-Buttons-Uploads-Checkbox-and-Dropdowns)"
-            },
-            "required": {
-              "label": "Required",
-              "info": "If checked, the customer will need to complete this field before they can add to cart."
-            },
-            "field_size": {
-              "label": "Field size",
-              "options": {
-                "single_line": "Single line",
-                "multi_line": "Multi line"
-              }
-            },
-            "character_limit": {
-              "label": "Character limit",
-              "info": "Optional. E.g. “200” will give a character limit of 200."
-            }
-          }
-        },
-        "text": {
-          "name": "Text",
-          "label_default": "Share content or link to a resource."
         }
       }
     },
@@ -2174,7 +1979,6 @@
     "1": "1",
     "2": "2",
     "Color_scheme": "Color scheme",
-    "color_scheme_width_info": "Only visible when ‘width’ is less than 100%",
     "Caption_color_scheme": "Caption color scheme",
     "Minimal": "Minimal",
     "Light": "Light",
@@ -2182,19 +1986,16 @@
     "Dark": "Dark",
     "Heading": "Heading",
     "Icon_style": "Icon style",
-    "Images": "Images",
     "Plus_minus": "Plus/minus",
     "Caret": "Caret",
     "Text": "Text",
     "Custom_HTML": "Custom HTML",
     "HTML": "HTML",
-    "Custom_Liquid": "Liquid",
+    "Custom_Liquid": "Custom Liquid",
     "Content": "Content",
     "Video": "Video",
     "Image": "Image",
-    "Shape": "Shape",
     "Overlay_opacity": "Overlay opacity",
-    "Overlay_opacity_deprecated": "Overlay opacity (deprecated)",
     "percentage": "%",
     "Description": "Description",
     "Overlay_text_color": "Overlay text color",
@@ -2202,11 +2003,9 @@
     "Link": "Link",
     "Video_URL": "Video URL",
     "Autoplay": "Autoplay",
-    "Videos_are_muted": "Videos are muted to allow autoplay.",
     "Video_will_be_muted_and_some_devices_may_prevent_autoplay_": "Video will be muted and some devices may prevent autoplay.",
-    "Loop": "Enable video looping",
+    "Loop": "Loop",
     "Mute": "Mute",
-    "Show_video_controls": "Show video controls",
     "Menu_item": "Menu item",
     "Subheading": "Subheading",
     "Featured_image": "Featured image",
@@ -2236,19 +2035,8 @@
     "Mobile": "Mobile",
     "Text_color": "Text color",
     "If_a_color_is_selected_it_will_override_the_color_scheme": "Optional. If a color is selected, it will override the color scheme.",
-    "If_a_color_is_selected_it_will_override_the_section_colors": "Optional. If a color is selected, it will override the section colors.",
     "ms": "ms",
     "Button": "Button",
-    "Primary": "Primary",
-    "Secondary": "Secondary",
-    "Primary_color": "Primary color",
-    "Secondary_color": "Secondary color",
-    "Secondary_button_color_info": "Only applies when Button style is 'Filled'",
-    "open_link_in_new_tab": "Open link in a new tab",
-    "Button_color": "Button color",
-    "Button_color_info": "Optional. If button colors are selected, it will override the colors set in ‘Theme settings > Colors > Buttons’.",
-    "Button_color_override": "Override button colors",
-    "Button_color_override_info": "Overriding will enable the color settings below",
     "Button_link": "Button link",
     "Button_text": "Button text",
     "Button_background": "Button background",
@@ -2258,8 +2046,7 @@
     "Color": "Color",
     "Background": "Background",
     "Caption_background": "Caption background",
-    "Optional": "Optional.",
-    "Options": "Options",
+    "Optional": "Optional",
     "Show_dates": "Show dates",
     "Selected_blog_posts": "Selected blog posts",
     "Selected_blog": "Selected blog",
@@ -2292,7 +2079,6 @@
     "A_Shopify_hosted_video_optional": "A Shopify hosted video (optional)",
     "Accepts_YouTube_and_Vimeo__Learn_morehttps___support_eightthemes_com_hc_en_us_articles_360020109497_Product_Mediaheading_2": "Accepts YouTube and Vimeo. [Learn more](https://support.eightthemes.com/hc/en-us/articles/360020109497-Product-Media#heading-2)",
     "Text_alignment": "Text alignment",
-    "Alignment": "Alignment",
     "Countdown_timer": "Countdown timer",
     "Countdown_end_date": "Countdown end date",
     "Use_the_format_mm_dd_yyyy_eg__01_31_2024": "Use the format mm-dd-yyyy, eg. 01-31-2024",
@@ -2304,7 +2090,6 @@
     "On_hover": "On hover",
     "Below_image": "Below image",
     "Collection": "Collection",
-    "Collection_list": "Collection list",
     "Image_Optional": "Image (Optional)",
     "Enable_overlay_gradient": "Enable overlay gradient",
     "Overlay_color": "Overlay color",
@@ -2366,6 +2151,7 @@
     "Image_link": "Image link",
     "Product": "Product",
     "Variant_style": "Variant style",
+    "You_may_need_to_upload_custom_swatch_images__Learn_morehttps___support_eightthemes_com_hc_en_us_articles_360020105257_How_to_Upload_Color_Swatches": "You may need to upload custom swatch images. [Learn more](https://support.eightthemes.com/hc/en-us/articles/360020105257-How-to-Upload-Color-Swatches)",
     "Dropdowns": "Dropdowns",
     "Swatches": "Swatches",
     "Hide_out_of_stock_variants": "Hide out of stock variants",
@@ -2433,7 +2219,6 @@
     "In_stock_message": "In stock message",
     "Low_stock_message": "Low stock message",
     "Out_of_stock_message": "Out of stock message",
-    "preorder_message": "Preorder message",
     "Narrow": "Narrow",
     "Required": "Required",
     "Input_width": "Input width",
@@ -2451,18 +2236,15 @@
     "Required_to_show_the_button": "Required to show the button",
     "Or_embed_video_from_URL": "Or embed video from URL",
     "Size": "Size",
-    "Size_desktop": "Size (desktop)",
     "Bottom_margin": "Bottom margin",
     "Block_spacing": "Block spacing",
     "Grid_image_size": "Grid image size",
     "Products": "Products",
     "Enable_collapsible_tab": "Enable collapsible tab",
     "Collapsible_tab": "Collapsible tab",
-    "Collapsible_tabs": "Collapsible tabs",
     "Custom_icon": "Custom icon",
     "Aspect_ratio_of_1_1_recommended": "Aspect ratio of 1:1 recommended",
-    "Open_Close_icon_style": "Open/close icon style",
-    "Page": "Page",
+    "Open_Close_icon_style": "Open/Close icon style",
     "Page_content": "Page content",
     "Image_style": "Image style",
     "Circle": "Circle",
@@ -2514,7 +2296,6 @@
     "height_mobile": "Height (mobile)",
     "section_link": "Section link",
     "optional_link_removed_when_block_link_is_added": "Optional. The link will be removed if a block with a link is added.",
-    "optional_link_removed_when_button_is_added": "Optional. The link will be removed if a button is added.",
     "parallax": "Parallax",
     "sticky_content": "Sticky content",
     "image_overlay": "Image overlay",
@@ -2528,16 +2309,8 @@
     "second_button_label": "Second button label",
     "underlined": "Underlined",
     "button_style": "Button style",
-    "view_all_button_style": "'View all' button style",
     "parallax_info": "Parallax won't trigger when 'Section height' is set to 'Original'.",
     "Caption_max_width": "Caption max width",
-    "heading_font_size": "Heading font size",
-    "text_font_size": "Text font size",
-    "slides": "Slides",
-    "slide_link": "Slide link",
-    "image_position": "Image position",
-    "video_position": "Video position",
-    "modal": "Modal",
-    "hint_text": "Hint text"
+    "heading_font_size": "Heading font size"
   }
 }
